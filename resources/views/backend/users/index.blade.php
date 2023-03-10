@@ -152,7 +152,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link list-item-delete text-black" href="{{url("/users/$user->user_id")}}">
+                            <a class="nav-link list-item-delete text-black" href="{{url("/users/$user->user_id/delete")}}">
                                 <span data-feather="trash-2"></span>
                                 Sil
                             </a>
@@ -184,5 +184,6 @@
 
 
     <script type="text/javascript" src="{{asset("build/assets/app-146f6bff.js")}}"></script>
+@include('sweetalert::alert')
   </body>
 </html>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -87,6 +88,7 @@ class UserController extends Controller
 
 
         $user->save();
+        Alert::success('Kullanıcı Güncellendi', 'Kullanıcı bilgileri başarıyla güncellendi.');
         return Redirect::to("/users");
     }
 
@@ -95,6 +97,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        return "destroy";
+        $user = User::find($id);
+        $user->delete();
+        Alert::success('Kullanıcı Silindi', 'Kullanıcı Başarıyla silindi');
+        return Redirect::to("/users");
+
     }
 }

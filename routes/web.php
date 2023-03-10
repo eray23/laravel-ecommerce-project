@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 
 Route::resource('/users', UserController::class);
+Route::get('/users/{user}/delete', [UserController::class, 'destroy']);

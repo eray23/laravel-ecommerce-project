@@ -123,14 +123,21 @@
         <form action="{{url("/users/$user->user_id")}}" method="POST">
             @csrf
             @method("PUT")
+            <input type="hidden" name="user_id" value="{{$user->user_id}}">
             <div class="row">
                 <div class="col-lg-6">
                         <label for="name" class="form-label">Ad Soyad</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Ad Soyad Giriniz" value="{{$user->name}}">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Ad Soyad Giriniz" value="{{old("name", $user->name)}}">
+                    @error("name")
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
                     <div class="col-lg-6">
                         <label for="email" class="form-label">Email Giriniz</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="E posta Giriniz" value="{{$user->email}}">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="E posta Giriniz" value="{{old("email", $user->email)}}">
+                        @error("email")
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
             </div>
             <div class="row">

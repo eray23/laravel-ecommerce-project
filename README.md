@@ -8,5 +8,5 @@
 </p>
 
 <p>
-<a href="https://www.youtube.com/playlist?list=PLz_s8jsFYEUUbC0q3nEGeCXI7usyEXDLR"></a>
+(https://www.youtube.com/playlist?list=PLz_s8jsFYEUUbC0q3nEGeCXI7usyEXDLR)
 </p>

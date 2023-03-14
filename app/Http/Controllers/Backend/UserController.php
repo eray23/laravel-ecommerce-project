@@ -118,6 +118,7 @@ class UserController extends Controller
         $password = $request->get("password");
         $user->password = Hash::make($password);
         $user->save();
+        Alert::success('Şifre Güncellendi', 'Kullanıcısının Şifresi Güncellendi');
         return Redirect::to("/users");
     }
 }

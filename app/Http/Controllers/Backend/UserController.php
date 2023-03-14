@@ -13,6 +13,12 @@ use function GuzzleHttp\Promise\all;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->returnUrl = "/users";
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -53,30 +59,21 @@ class UserController extends Controller
         Alert::success('Kullanıcı Eklendi', 'Kullanıcı başarıyla eklendi.');
 
 
-        return Redirect::to("/users");
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return "show => $id";
+        return Redirect::to($this->returnUrl);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
         return view("backend.users.update_form", ["user" => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, string $id)
+    public function update(UserRequest $request, User $user)
     {
         $name = $request->get("name");
         $email = $request->get("email");
@@ -84,7 +81,6 @@ class UserController extends Controller
         $is_active = $request->get("is_active", 0);
 
 
-        $user = User::find($id);
         $user->name = $name;
         $user->email = $email;
         $user->is_admin = $is_admin;
@@ -93,18 +89,17 @@ class UserController extends Controller
 
         $user->save();
         Alert::success('Kullanıcı Güncellendi', 'Kullanıcı bilgileri başarıyla güncellendi.');
-        return Redirect::to("/users");
+        return Redirect::to($this->returnUrl);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        $user = User::find($id);
         $user->delete();
         Alert::success('Kullanıcı Silindi', 'Kullanıcı Başarıyla silindi');
-        return Redirect::to("/users");
+        return Redirect::to($this->returnUrl);
 
     }
     /**
@@ -118,7 +113,7 @@ class UserController extends Controller
         $password = $request->get("password");
         $user->password = Hash::make($password);
         $user->save();
-        Alert::success('Şifre Güncellendi', 'Kullanıcısının Şifresi Güncellendi');
-        return Redirect::to("/users");
+        Alert::html("Şifre Güncellendi", "{{$user->name}}", "success");
+        return Redirect::to($this->returnUrl);
     }
 }

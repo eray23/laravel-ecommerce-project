@@ -41,23 +41,12 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $name = $request->get("name");
-        $email = $request->get("email");
-        $password = $request->get("password");
-        $is_admin = $request->get("is_admin", 0);
-        $is_active = $request->get("is_active", 0);
-
-
         $user = new User();
-        $user->name = $name;
-        $user->email = $email;
-        $user->password = Hash::make($password);
-        $user->is_admin = $is_admin;
-        $user->is_active = $is_active;
-
+        $data =$this->prepare($request, $user->getFillable());
+        $user->fill($data);
         $user->save();
-        Alert::success('Kullanıcı Eklendi', 'Kullanıcı başarıyla eklendi.');
 
+        Alert::html("Kullanıcı Eklendi", "{{$user->name}} Kullanıcısı başarıyla eklendi.", "success");
 
         return Redirect::to($this->returnUrl);
     }
@@ -75,17 +64,8 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        $name = $request->get("name");
-        $email = $request->get("email");
-        $is_admin = $request->get("is_admin", 0);
-        $is_active = $request->get("is_active", 0);
-
-
-        $user->name = $name;
-        $user->email = $email;
-        $user->is_admin = $is_admin;
-        $user->is_active = $is_active;
-
+        $data =$this->prepare($request, $user->getFillable());
+        $user->fill($data);
 
         $user->save();
         Alert::success('Kullanıcı Güncellendi', 'Kullanıcı bilgileri başarıyla güncellendi.');
@@ -110,10 +90,10 @@ class UserController extends Controller
         return view("backend.users.password_form", ["user"=>$user]);
     }
     public function changePassword(User $user, UserRequest $request){
-        $password = $request->get("password");
-        $user->password = Hash::make($password);
+        $data =$this->prepare($request, $user->getFillable());
+        $user->fill($data);
         $user->save();
-        Alert::html("Şifre Güncellendi", "{{$user->name}}", "success");
+        Alert::html("Şifre Güncellendi", "{{$user->name}} Kullanıcısının şifresi güncellendi.", "success");
         return Redirect::to($this->returnUrl);
     }
 }

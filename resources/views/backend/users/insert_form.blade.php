@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <label for="password" class="form-label">Şifre Giriniz</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Şifrenizi Giriniz">,
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Şifrenizi Giriniz">
                     @error("password")
                     <span class="text-danger">{{$message}}</span>
                     @enderror

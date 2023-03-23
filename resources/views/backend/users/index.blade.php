@@ -48,6 +48,12 @@
                                         Şifre Değiştir
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-black" href="{{url("/users/$user->user_id/addresses")}}">
+                                        <span data-feather="lock"></span>
+                                        Adreslerim
+                                    </a>
+                                </li>
                             </ul>
                         </td>
 

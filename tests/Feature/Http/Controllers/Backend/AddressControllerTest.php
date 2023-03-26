@@ -35,6 +35,7 @@ class AddressControllerTest extends TestCase
         $addr = Address::factory()->make();
         $data = $addr->toArray();
 
+
         $response = $this->post('/users/1/addresses', $data);
         $response->assertRedirect("/users/1/addresses");
     }

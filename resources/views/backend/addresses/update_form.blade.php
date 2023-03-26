@@ -1,5 +1,3 @@
-
-
 @extends("backend.shared.backend_theme")
 @section("title", "Kullanıcı Modülü")
 @section("subtitle", "Kullanıcı Bilgilerini Güncelle")
@@ -8,37 +6,46 @@
 
 
     <div class="table-responsive">
-        <form action="{{url("/users/$user->user_id")}}" method="POST">
+        <form action="{{url("/users/$user->user_id/addresses/$addr->address_id")}}" method="POST">
             @csrf
             @method("PUT")
             <input type="hidden" name="user_id" value="{{$user->user_id}}">
             <div class="row">
                 <div class="col-lg-6">
-                    <label for="name" class="form-label">Ad Soyad</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Ad Soyad Giriniz" value="{{old("name", $user->name)}}">
-                    @error("name")
+                    <label for="city" class="form-label">Şehir</label>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="Şehir Giriniz" value="{{old("city", $addr->city)}}">
+                    @error("city")
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="col-lg-6">
-                    <label for="email" class="form-label">Email Giriniz</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="E posta Giriniz" value="{{old("email", $user->email)}}">
-                    @error("email")
+                    <label for="district" class="form-label">İlçe Giriniz</label>
+                    <input type="text" class="form-control" id="district" name="district" placeholder="İlçe Giriniz" value="{{old("district", $addr->district)}}">
+                    @error("district")
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="form-check mt-4">
-                        <input class="form-check-input" type="checkbox" id="is_admin" name="is_admin" value="1" {{$user->is_admin == 1 ? "checked" : ""}}>
-                        <label class="form-check-label" for="is_admin">Yetkili Kullanıcı</label>
-                    </div>
+                    <label for="zipcode" class="form-label">Posta Kodu</label>
+                    <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Posta Kodunuzu Giriniz" value="{{old("zipcode", $addr->zipcode)}}">
+                    @error("zipcode")
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-check mt-4">
+                    <input class="form-check-input" type="checkbox" id="is_default" name="is_default" value="1 {{$addr->is_default == 1 ? "checked" : ""}}">
+                    <label class="form-check-label" for="is_default">Varsayılan</label>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-6">
-                    <div class="form-check mt-4">
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" {{$user->is_active == 1 ? "checked" : ""}}>
-                        <label class="form-check-label" for="is_active">Aktif Kullanıcı</label>
+                    <div class="col-lg-12">
+                        <label for="address" class="form-label">Açık Adres</label>
+                        <textarea name="address" id="address" cols="20" rows="5" class="form-control">{{$addr->address}}</textarea>
                     </div>
                 </div>
             </div>

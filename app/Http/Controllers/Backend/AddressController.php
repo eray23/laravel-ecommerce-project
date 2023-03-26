@@ -21,8 +21,8 @@ class AddressController extends Controller
 
     public function index(User $user)
     {
-        $addrs = $user->addrs();
-        return view("backend.addresses.index", ["addrs" => $addrs]);
+        $addrs = $user->addrs;
+        return view("backend.addresses.index", ["addrs" => $addrs, "user" => $user]);
     }
 
     /**
@@ -39,7 +39,7 @@ class AddressController extends Controller
     public function store(User $user, AddressRequest $request)
     {
         $addr = new Address();
-        $data = $this->prepare($request, $user->getFillable());
+        $data = $this->prepare($request, $addr->getFillable());
         $addr->fill($data);
         $addr->save();
 

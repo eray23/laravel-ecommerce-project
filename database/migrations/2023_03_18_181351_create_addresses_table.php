@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("district");
             $table->string("zipcode");
             $table->string("address");
-            $table->boolean("is_default");
+            $table->boolean("is_default")->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

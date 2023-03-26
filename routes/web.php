@@ -24,6 +24,8 @@ Route::get('/users/{user}/delete', [UserController::class, 'destroy']);
 Route::get('/users/{user}/change-password', [UserController::class, 'passwordForm']);
 Route::post('/users/{user}/change-password', [UserController::class, 'changePassword']);
 Route::resource('/users/{user}/addresses', \App\Http\Controllers\Backend\AddressController::class);
+Route::get('users/{user}/addresses/{address}/delete', [\App\Http\Controllers\Backend\AddressController::class, 'destroy']);
+
 
 
 

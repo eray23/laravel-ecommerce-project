@@ -41,7 +41,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link list-item-delete text-black" href="{{url("/users/$addr->user_id/addresses/$addr->address_id")}}">
+                                    <a class="nav-link list-item-delete text-black" href="{{url("/users/$addr->user_id/addresses/$addr->address_id/delete")}}">
                                         <span data-feather="trash-2"></span>
                                         Sil
                                     </a>

@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AddressController extends Controller
 {
@@ -73,10 +74,14 @@ class AddressController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Address $address)
+    public function destroy(User $user, Address $address)
     {
         $address->delete();
-        return response()->json(["message"=>"Done", "id" =>$address->address_id]);
+
+        Alert::success('Adres Silindi', 'Adres Başarıyla silindi');
+
+        $this->editReturnUrl($user->user_id);
+        return Redirect::to($this->returnUrl);
     }
 
     private function editReturnUrl($id){

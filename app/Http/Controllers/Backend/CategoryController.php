@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $category->fill($data);
         $category->save();
 
-        Alert::html("Kullanıcı Eklendi", "{{$category->name}} Kullanıcısı başarıyla eklendi.", "success");
+        Alert::html("Kategori Eklendi", "{{$category->name}} kategori başarıyla eklendi.", "success");
 
         return Redirect::to($this->returnUrl);
     }
@@ -69,7 +69,7 @@ class CategoryController extends Controller
         $category->fill($data);
 
         $category->save();
-        Alert::success('Kullanıcı Güncellendi', 'Kullanıcı bilgileri başarıyla güncellendi.');
+        Alert::success('Kategori Güncellendi', 'Kategori bilgileri başarıyla güncellendi.');
         return Redirect::to($this->returnUrl);
     }
 
@@ -79,7 +79,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        Alert::success('Kullanıcı Silindi', 'Kullanıcı Başarıyla silindi');
+        Alert::success('Kategori Silindi', 'Kategori Başarıyla silindi');
         return Redirect::to($this->returnUrl);
 
     }

@@ -11,4 +11,10 @@
             Kullanıcılar
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/users">
+            <span data-feather="file" class="align-text-bottom"></span>
+            Kategoriler
+        </a>
+    </li>
 </ul>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\AddressController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::resource('/users/{user}/addresses', AddressController::class);
 Route::get('users/{user}/addresses/{address}/delete', [AddressController::class, 'destroy']);
 Route::resource('/categories', CategoryController::class);
 Route::get("categories/{category}/delete", [CategoryController::class, 'destroy']);
+Route::resource('/products', ProductController::class);
+
 
 
 

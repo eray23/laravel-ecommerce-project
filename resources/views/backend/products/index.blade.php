@@ -1,7 +1,7 @@
 @extends("backend.shared.backend_theme")
-@section("title","Kategori Modülü")
-@section("subtitle","Kategoriler")
-@section("add_new_url", url("/categories/create"))
+@section("title","Ürün Modülü")
+@section("subtitle","Ürünler")
+@section("add_new_url",url("/products/create"))
 @section("btn_label","Yeni Ekle")
 @section("btn_icon","plus")
 @section("content")
@@ -9,21 +9,25 @@
         <thead>
         <tr>
             <th scope="col">Sıra No</th>
-            <th scope="col">Adı</th>
-            <th scope="col">Slug</th>
+            <th scope="col">Ürün Adı</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Fiyat</th>
+            <th scope="col">Eski Fiyat</th>
             <th scope="col">Durum</th>
             <th scope="col">İşlemler</th>
         </tr>
         </thead>
         <tbody>
-        @if(count($categories) > 0)
-            @foreach($categories as $category)
-                <tr id="{{$category->category_id}}">
+        @if(count($products) > 0)
+            @foreach($products as $product)
+                <tr id="{{$product->product_id}}">
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$category->name}}</td>
-                    <td>{{$category->slug}}</td>
+                    <td>{{$product->name}}</td>
+                    <td>{{$product->category->name}}</td>
+                    <td>{{$product->price}}</td>
+                    <td>{{$product->old_price}}</td>
                     <td>
-                        @if($category->is_active == 1)
+                        @if($product->is_active == 1)
                             <span class="badge bg-success">Aktif</span>
                         @else
                             <span class="badge bg-danger">Pasif</span>
@@ -32,14 +36,14 @@
                     <td>
                         <ul class="nav float-start">
                             <li class="nav-item">
-                                <a class="nav-link text-black" href="{{url("/categories/$category->category_id/edit")}}">
+                                <a class="nav-link text-black" href="{{url("/products/$product->product_id/edit")}}">
                                     <span data-feather="edit"></span>
                                     Güncelle
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link list-item-delete text-black"
-                                   href="{{url("/categories/$category->category_id/delete")}}">
+                                   href="{{url("/products/$product->product_id/delete")}}">
                                     <span data-feather="trash-2"></span>
                                     Sil
                                 </a>
@@ -50,8 +54,8 @@
             @endforeach
         @else
             <tr>
-                <td colspan="5">
-                    <p class="text-center">Herhangi bir kategori bulunamadı.</p>
+                <td colspan="7">
+                    <p class="text-center">Herhangi bir kayıt bulunamadı.</p>
                 </td>
             </tr>
         @endif

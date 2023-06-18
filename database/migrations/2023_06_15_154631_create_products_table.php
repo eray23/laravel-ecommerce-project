@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id("product_id");
             $table->foreignIdFor(\App\Models\Category::class,"category_id");
             $table->string("name");
-            $table->decimal("price");
-            $table->decimal("old_price");
+            $table->float("price");
+            $table->float("old_price")->nullable();
             $table->text("lead");
             $table->text("description");
             $table->string("slug");

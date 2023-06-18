@@ -12,9 +12,15 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/users">
+        <a class="nav-link" href="/categories">
             <span data-feather="file" class="align-text-bottom"></span>
             Kategoriler
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/products">
+            <span data-feather="file" class="align-text-bottom"></span>
+            Ürünler
         </a>
     </li>
 </ul>

@@ -58,6 +58,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         return view("backend.categories.update_form", ["category" => $category]);
+
     }
 
     /**
@@ -65,9 +66,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
+
         $data =$this->prepare($request, $category->getFillable());
         $category->fill($data);
-
         $category->save();
         Alert::success('Kategori Güncellendi', 'Kategori bilgileri başarıyla güncellendi.');
         return Redirect::to($this->returnUrl);

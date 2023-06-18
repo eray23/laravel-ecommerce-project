@@ -17,6 +17,11 @@
                 <x-checkbox field="is_active" label="Aktif Kategori" />
             </div>
         </div>
+        <div class="col-lg-6">
+            <div class="mt-2">
+                <x-input label="Slug" placeholder="Slug giriniz" field="slug"/>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary mt-2"><span data-feather="save"></span> KAYDET

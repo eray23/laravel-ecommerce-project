@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\Concerns\Has;
 
 class CategoryRequest extends FormRequest
@@ -25,7 +26,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "slug" => "required|sometimes|unique:App\Models\Category, slug",
+            "slug" => "required|sometimes|unique:App\Models\Category,slug", ## "slug" => "required|sometimes|unique:App\Models\Category, slug",  sırf önünde boşluk olduğu için hata alıyordum kategori kaydı yapılamıyordu!
         ];
     }
     public function messages()

@@ -31,6 +31,7 @@ Route::get('users/{user}/addresses/{address}/delete', [AddressController::class,
 Route::resource('/categories', CategoryController::class);
 Route::get("categories/{category}/delete", [CategoryController::class, 'destroy']);
 Route::resource('/products', ProductController::class);
+Route::get("products/{product}/delete", [ProductController::class, 'destroy']);
 
 
 

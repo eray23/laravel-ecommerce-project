@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\AddressController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ProductImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::resource('/categories', CategoryController::class);
 Route::get("categories/{category}/delete", [CategoryController::class, 'destroy']);
 Route::resource('/products', ProductController::class);
 Route::get("products/{product}/delete", [ProductController::class, 'destroy']);
+Route::resource("products/{product}/images", ProductImageController::class);
 
 
 

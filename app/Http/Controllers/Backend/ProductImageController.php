@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddressRequest;
-use App\Models\Address;
-use App\Models\User;
+use App\Http\Requests\ProductImageRequest;
+use App\Models\ProductImage;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductImageController extends Controller
@@ -18,33 +19,33 @@ class ProductImageController extends Controller
     public function __construct()
     {
         $this->returnUrl = "/products/{}/images";
+        $this->fileRepo = "public/products";
     }
 
-    public function index(User $user)
+    public function index(Product $product)
     {
-        $addrs = $user->addrs;
-        return view("backend.images.index", ["addrs" => $addrs, "user" => $user]);
+        return view("backend.images.index", ["product" => $product]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(User $user)
+    public function create(Product $product)
     {
-        return view("backend.images.insert_form", ["user"=>$user]);
+        return view("backend.images.insert_form", ["product"=>$product]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(User $user, AddressRequest $request)
+    public function store(Product $product, ProductImageRequest $request)
     {
-        $addr = new Address();
-        $data = $this->prepare($request, $addr->getFillable());
-        $addr->fill($data);
-        $addr->save();
+        $productImage = new ProductImage();
+        $data = $this->prepare($request, $productImage->getFillable());
+        $productImage->fill($data);
+        $productImage->save();
 
-        $this->editReturnUrl($user->user_id);
+        $this->editReturnUrl($product->product_id);
 
         return Redirect::to($this->returnUrl);
     }
@@ -52,21 +53,21 @@ class ProductImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user, Address $address)
+    public function edit(Product $product, ProductImage $image)
     {
-        return view("backend.images.update_form", ["user"=>$user, "addr"=>$address]);
+        return view("backend.images.update_form", ["product"=>$product, "image"=>$image]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(AddressRequest $request, User $user, Address $address)
+    public function update(ProductImageRequest $request, Product $product, ProductImage $image)
     {
-        $data = $this->prepare($request, $address->getFillable());
-        $address->fill($data);
-        $address->save();
+        $data = $this->prepare($request, $image->getFillable());
+        $image->fill($data);
+        $image->save();
 
-        $this->editReturnUrl($user->user_id);
+        $this->editReturnUrl($product->product_id);
 
         return Redirect::to($this->returnUrl);
     }
@@ -74,14 +75,19 @@ class ProductImageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user, Address $address)
+    public function destroy(Product $product, ProductImage $image)
     {
-        $address->delete();
+        $image->delete();
+        $filepath = $this->fileRepo . "/" . $image->image_url;
 
-        Alert::success('Adres Silindi', 'Adres Başarıyla silindi');
+        if (Storage::disk("local")->exists($filepath)) {
+            Storage::disk("local")->delete($filepath);
+        }
 
-        $this->editReturnUrl($user->user_id);
-        return Redirect::to($this->returnUrl);
+        Alert::success('Ürün Resmi Silindi', 'Ürün Resmi Başarıyla silindi');
+        return Redirect::to('/products');
+
+
     }
 
     private function editReturnUrl($id){

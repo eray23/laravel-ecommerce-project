@@ -48,6 +48,13 @@
                                     Sil
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-black"
+                                   href="{{url("/products/$product->product_id/images")}}">
+                                    <span data-feather="image"></span>
+                                    Fotoğraflar
+                                </a>
+                            </li>
                         </ul>
                     </td>
                 </tr>

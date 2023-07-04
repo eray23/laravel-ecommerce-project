@@ -34,6 +34,8 @@ Route::get("categories/{category}/delete", [CategoryController::class, 'destroy'
 Route::resource('/products', ProductController::class);
 Route::get("products/{product}/delete", [ProductController::class, 'destroy']);
 Route::resource("products/{product}/images", ProductImageController::class);
+Route::get("products/{product}/images/{image}/delete", [ProductImageController::class, 'destroy']);
+
 
 
 

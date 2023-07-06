@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CartDetails extends Model
+class OrderDetails extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "cart_detail_id";
+    protected $primaryKey = "order_details_id";
 
     protected $fillable = [
-        'cart_detail_id',
-        'cart_id',
-        'product_id',
-        'quantity'
+        "order_details_id",
+        "order_id",
+        "product_id",
+        "quantity",
     ];
 }
